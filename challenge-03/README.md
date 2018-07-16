@@ -204,7 +204,7 @@ pessoa.apresentacao = function(){
         stringMetros = 'eu já caminhei ' + pessoa.caminhouQuantosMetros + ' metro!';
     }
 
-    return stringSexo +  stringIdade + 'meu peso é ' + pessoa.peso + "Kg e, só hoje, " + stringMetros;
+    return stringSexo + stringIdade + pessoa.altura + ', meu peso é ' + pessoa.peso + "Kg e, só hoje, " + stringMetros;
 }
 
 // Agora, apresente-se ;)
