@@ -21,7 +21,7 @@ Troque o nome "Manuel Marques de Sousa" pelo seu nome, e mostre o resultado
 no console:
 */
 console.log( 'Adicionando seu nome no texto:' );
-console.log(text.replace(/Manuel/g, 'Mariana'));
+console.log(text.replace(/Manuel Marques de Sousa/g, 'Mariana Zangrossi'));
 
 /*
 Agora, substitua a palavra "brasileiro" por sua cidade natal e mostre no
@@ -94,8 +94,9 @@ function getMonthNumber(monthName) {
         if(monthName === prop) {
             return months[prop];
         }
-        continue;
     }
+
+    /* return months[ monthName] */
 }
 
 console.log('O mês de março é representado pelo número', getMonthNumber('março') + '.');
@@ -112,7 +113,7 @@ Mostre a regex no console.
 */
 console.log( '\nRegex que vai fazer o match com as datas do texto:' );
 var regexDate;
-regexDate = /(13|18)\s(de)\s(junho|julho)\s(de)\s(1804|1875)/g;
+regexDate = /(\d\d)\sde\s(junho|julho)\sde\s(\d\d\d\d)/g;
 console.log(regexDate);
 
 /*
@@ -124,8 +125,8 @@ console o resultado.
 */
 console.log( '\nReplace de datas:' );
 function replaceDate(regexDate) {
-    return text.replace(regexDate, function(totalCap, day, firstOf, month, secondOf, year) {
-        return (day + '/' + getMonthNumber(month) + '/' + year);
+    return text.replace(regexDate, function(totalCap, day, month, year) {
+        return day + '/' + getMonthNumber(month) + '/' + year;
     })
 }
 
