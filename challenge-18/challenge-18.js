@@ -19,11 +19,17 @@ eles! Use um console.log para cada CPF.
 - "101.123-131x32"
 */
 console.log( 'Limpando CPFs:' );
-var regexCPF = /(\d{3})[.\s\-](\d{3})[.\s\-](\d+)[.\s\-\w][\D*]?[\D*]?(\d{1,2})/;
 function cleanCPF(cpf) {
+
+    return cpf.replace( /\D/g, '');
+    /*  Modo que eu fiz: 
+
+    var regexCPF = /(\d{3})[.\s\-](\d{3})[.\s\-](\d+)[.\s\-\w][\D*]?[\D*]?(\d{1,2})/;
+
     return cpf.replace(regexCPF, function(regex, firstOfThree, secondOfThree, thirdOfThree, lastTwo) {
-        return firstOfThree.toString() + secondOfThree + thirdOfThree + lastTwo;
-    });
+         return firstOfThree.toString() + secondOfThree + thirdOfThree + lastTwo;
+    }); 
+    */
 }
 
 console.log(cleanCPF("049-214 3421-1"));
@@ -38,7 +44,10 @@ Mostre o resultado no console.
 */
 console.log( '\nFormatando CPFs corretamente:' );
 function formatCPF(cpfNumber) {
+    return cpfNumber.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4' );
+    /* Modo que eu fiz: 
     return cpfNumber.substring(0,3).concat( '.', cpfNumber.substring(3, 6), '.', cpfNumber.substring(6, 9), '-', cpfNumber.substring(9, 12) );
+    */
 }
 
 console.log(formatCPF( cleanCPF("049-214 3421-1") ));
@@ -108,7 +117,8 @@ corretas, para depois aplicar no código ;)
 */
 console.log( '\nFazer replace dos textos das tags:' );
 var tags = "<h1>Título da página</h1><p>Este é um parágrafo</p><footer>Rodapé</footer>";
-console.log(tags.replace(/(\<(\w+)\>)([^\<]+)(\<\/\w+\>)/g, function(regex, tag, tagName, text, closeTag) {
+console.log( tags.replace(/(\<(\w+)\>)([^\<\/]+)(\<\/\w+\>)/g, function(regex, tag, tagName, text, closeTag) {
         return tag + 'O texto dentro da tag "' + tagName + '" é "' + text + '"' + closeTag + '\n';
-    }));
+    }) );
+
 }());
