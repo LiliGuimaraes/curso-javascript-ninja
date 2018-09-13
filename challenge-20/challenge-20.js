@@ -8,49 +8,54 @@ a marcação criada nele para fazer nosso desafio ;)
 O HTML NÃO PODE ser alterado!
 */
 
+(function(win, doc){
+
 /*
 Ao carregar a página, pergunte ao usuário "Qual o seu nome?". Atribua o
 resultado à uma variável chamada `username`. Se o usuário não digitar um
 nome, `username` deve receber "Desconhecido".
 Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
 */
-// ?
+let username = window.prompt('Qual o seu nome?');
+if (username === '') username = 'Desconhecido';
+alert(`Bem vindo(a), ${username}`);
 
 /*
 Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
 uma variável chamada `email`.
 */
-// ?
+let email = window.prompt('Qual seu e-mail?')
 
 /*
 - Selecione o input de "Nome", atribuindo-o à uma variável chamada
 `$inputUsername`.
 */
-// ?
+let $inputUsername = doc.querySelector('[type="text"');
 
 /*
 - Selecione o input de "Email", atribuindo-o à uma variável chamada
 `$inputEmail`.
 */
-// ?
+let $inputEmail = doc.querySelector('[type="email"]');
 
 /*
 - Selecione o campo de "Mensagem", atribuindo-o à uma variável chamada
 `$message`.
 */
-// ?
+let $message = doc.querySelector('textarea');
 
 /*
 - Selecione o botão de envio do formulário, atribuindo-o à uma variável
 chamada `$button`.
 */
-// ?
+let $button = doc.querySelector('[type="submit"]');
 
 /*
 Preencha os campos de "Nome" e "Email" que estão no documento com os valores
 entrados pelo usuário.
 */
-// ?
+$inputUsername.value = username;
+$inputEmail.value = email;
 
 /*
 Adicione um listener de evento de click ao botão que faça o seguinte:
@@ -76,7 +81,21 @@ Se for confirmado, mostre um alerta com a mensagem:
 Caso contrário, mostre um alerta com a mensagem:
     - "Não enviado."
 */
-// ?
+$button.addEventListener('click', function() {
+
+    if($inputUsername.value === '') alert('Preencha o nome do usuário!');
+
+    if($inputEmail.value === '') alert('Preencha o e-mail!');
+
+    if($message.value === '') alert('Preencha a mensagem!');
+
+    if(!isValidEmail($inputEmail)) alert('Entre com um e-mail válido!');
+    
+    let confirm = win.confirm('Tem certeza que deseja enfiar o formulário?');
+
+    confirm ? alert('Enviado com sucesso!') : alert('Não enviado');
+
+});
 
 /*
 Crie uma função chamada `isValidEmail`, que será usada na validação do
@@ -104,4 +123,6 @@ Alguns e-mails inválidos:
     - "rita-marica@titica.a.b"
     - "agua_@evida.br.com"
 */
-// ?
+isValidEmail(email) {}
+
+})(window, document);
