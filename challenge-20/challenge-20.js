@@ -83,17 +83,22 @@ Caso contrário, mostre um alerta com a mensagem:
 */
 $button.addEventListener('click', function() {
 
-    if($inputUsername.value === '') alert('Preencha o nome do usuário!');
-
-    if($inputEmail.value === '') alert('Preencha o e-mail!');
-
-    if($message.value === '') alert('Preencha a mensagem!');
-
-    if(!isValidEmail($inputEmail)) alert('Entre com um e-mail válido!');
-    
-    let confirm = win.confirm('Tem certeza que deseja enfiar o formulário?');
-
-    confirm ? alert('Enviado com sucesso!') : alert('Não enviado');
+    if ($inputUsername.value === '') {
+        alert('Preencha o nome do usuário!');
+    }
+    else if($inputEmail.value === '') { 
+        alert('Preencha o e-mail!');
+    }
+    else if($message.value === '') {
+        alert('Preencha a mensagem!');
+    }
+    else if(!isValidEmail($inputEmail)) {
+        alert('Entre com um e-mail válido!');
+    }
+    else {
+        let confirm = win.confirm('Tem certeza que deseja enfiar o formulário?');
+        confirm ? alert('Enviado com sucesso!') : alert('Não enviado');
+    }
 
 });
 
@@ -123,6 +128,8 @@ Alguns e-mails inválidos:
     - "rita-marica@titica.a.b"
     - "agua_@evida.br.com"
 */
-isValidEmail(email) {}
+isValidEmail(email) {
+    return email.match(/[\w\d\+\.]+@[\w\_]+\.\w{2,}(\.\w{2})?/) ? true : false;
+}
 
 })(window, document);
