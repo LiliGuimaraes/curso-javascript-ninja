@@ -16,7 +16,8 @@ resultado à uma variável chamada `username`. Se o usuário não digitar um
 nome, `username` deve receber "Desconhecido".
 Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
 */
-let username = window.prompt('Qual o seu nome?');
+let username = win.prompt('Qual o seu nome?');
+// let username = win.prompt('Qual o seu nome?) || 'Desconhecido'; Isso é chamado de curto circuito
 if (username === '') username = 'Desconhecido';
 alert(`Bem vindo(a), ${username}`);
 
@@ -24,7 +25,7 @@ alert(`Bem vindo(a), ${username}`);
 Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
 uma variável chamada `email`.
 */
-let email = window.prompt('Qual seu e-mail?')
+let email = win.prompt('Qual seu e-mail?')
 
 /*
 - Selecione o input de "Nome", atribuindo-o à uma variável chamada
@@ -81,26 +82,22 @@ Se for confirmado, mostre um alerta com a mensagem:
 Caso contrário, mostre um alerta com a mensagem:
     - "Não enviado."
 */
-$button.addEventListener('click', function() {
+$button.addEventListener('click', function(event) {
+    event.preventDefault();
 
-    if ($inputUsername.value === '') {
-        alert('Preencha o nome do usuário!');
-    }
-    else if($inputEmail.value === '') { 
-        alert('Preencha o e-mail!');
-    }
-    else if($message.value === '') {
-        alert('Preencha a mensagem!');
-    }
-    else if(!isValidEmail($inputEmail)) {
-        alert('Entre com um e-mail válido!');
-    }
-    else {
-        let confirm = win.confirm('Tem certeza que deseja enfiar o formulário?');
-        confirm ? alert('Enviado com sucesso!') : alert('Não enviado');
-    }
+    // '' é um valor falsy
+    if (!$inputUsername.value) return alert('Preencha o nome do usuário!');
+    
+    if ($inputEmail.value === '')  return alert('Preencha o e-mail!');
+    
+    if ($message.value === '') return alert('Preencha a mensagem!');
+    
+    if (!isValidEmail($inputEmail.value)) return alert('Entre com um e-mail válido!');
 
-});
+    return win.confirm('Tem certeza que deseja enfiar o formulário?') ? alert('Enviado com sucesso!') : alert('Não enviado');
+
+
+}, false);
 
 /*
 Crie uma função chamada `isValidEmail`, que será usada na validação do
@@ -128,8 +125,8 @@ Alguns e-mails inválidos:
     - "rita-marica@titica.a.b"
     - "agua_@evida.br.com"
 */
-isValidEmail(email) {
-    return email.match(/[\w\d\+\.]+@[\w\_]+\.\w{2,}(\.\w{2})?/) ? true : false;
+function isValidEmail(email) {
+    return /^[\w\.+]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email)
 }
 
 })(window, document);
