@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cronômetro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * { box-sizing: border-box; }
+
+            body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                font-family: Helvetica, Arial, sans-serif;
+            }
+
+            .main {
+                width: 400px;
+                text-align: center;
+            }
+
+            .form__input-timer {
+                height: 50px;
+                width: 250px;
+                text-align: center;
+                font-size: 20px;
+                border: 1px solid lightgray;
+                border-radius: 5px;
+            }
+
+            .form__btn { margin: 10px 0; }
+
+            .btn {
+                border-radius: 5px;
+                border: none;
+                padding: 5px 15px;
+                font-size: 17px;
+                margin: 0 5px;
+                color: white;
+            }
+
+            .start-btn { background-color: forestgreen; }
+            .stop-btn { background-color: tomato; }
+            .reset-btn { background-color: gold; }
+
+        </style>
+    </head>
+    <body>
+        <main class="main">
+            <h1 class="main__title">Cronômetro</h1>
+            <form class="main__form">
+
+                <input type="text" data-js="timer-input" class="form__input-timer">
+
+                <div class="form__btn">
+                    <input type="submit" data-js="timer-start" value="Start" class="btn start-btn">
+                    <input type="submit" data-js="timer-stop" value="Stop" class="btn stop-btn">
+                    <input type="submit" data-js="timer-reset" value="Reset" class="btn reset-btn">
+                </div>
+
+            </form>
+        </main>
+        <script src="challenge-21.js"></script>
+    </body>
+</html>
