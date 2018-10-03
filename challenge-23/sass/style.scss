@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  &__btn {
+    background-color: blue;
+  }
+}

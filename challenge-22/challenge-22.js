@@ -1,16 +1,17 @@
   (function(){
+  'use strict';
   /*
   Crie dois objetos, que serão duas pessoas. Cada um deve ter as propriedades
   `name` e `lastName`, preenchidos com o nome e sobrenome da pessoa.
   */
-  function Person(name, lastName) {
-    this.name = name;
-    this.lastName = lastName;
-  }
-
-
-  let michaelJackson = new Person('Michael', 'Jackson');
-  let angelinaJolie = new Person('Angelina', 'Jolie');
+  let michaelJackson = {
+    name: 'Michael',
+    lastName: 'Jackson'
+  };
+  let angelinaJolie = {
+    name: 'Angelina',
+    lastName: 'Jolie'
+  };
 
   /*
   Agora crie uma função chamada `getFullName` que retorne as propriedades
@@ -24,12 +25,12 @@
   contexto da função. Use um console.log por pessoa.
   */
   console.log( 'O nome das pessoas é:' );
-  Person.prototype.getFullName = function() {
+  function getFullName() {
     return `${this.name} ${this.lastName}`;
   }
 
-  console.log(michaelJackson.getFullName());
-  console.log(angelinaJolie.getFullName());
+  console.log( getFullName.call( michaelJackson ) );
+  console.log( getFullName.call( angelinaJolie ) );
 
   /*
   Crie uma função chamada `sum`. Essa função pode receber uma lista de
@@ -76,6 +77,7 @@
   let justNumbers = function justNumbers(text) {
     return text.replace(/[\D\s]/g, '').split('');
   };
+  console.log( justNumbers('42mari84, 0ana').join() );
 
   /*
   Usando a função acima, faça a limpeza dos valores entrados pelo usuário,
