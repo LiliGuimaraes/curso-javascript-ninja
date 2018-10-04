@@ -8,30 +8,30 @@
   </head>
   <body>
     <main class="main">
-      <input type="text" value="0" disabled class="main__input" id="mainInput">
+      <input type="text" value="0" class="main__input" data-js="input" readonly>
       <div class="main__btn numeric">
-        <input type="button" value="1" class="btn numeric__btn">
-        <input type="button" value="2" class="btn numeric__btn">
-        <input type="button" value="3" class="btn numeric__btn">
-        <input type="button" value="4" class="btn numeric__btn">
-        <input type="button" value="5" class="btn numeric__btn">
-        <input type="button" value="6" class="btn numeric__btn">
-        <input type="button" value="7" class="btn numeric__btn">
-        <input type="button" value="8" class="btn numeric__btn">
-        <input type="button" value="9" class="btn numeric__btn">
-        <input type="button" value="0" class="btn numeric__btn">
+        <input type="button" value="1" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="2" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="3" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="4" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="5" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="6" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="7" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="8" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="9" class="btn numeric__btn" data-js="number-button">
+        <input type="button" value="0" class="btn numeric__btn" data-js="number-button">
       </div>
 
       <div class="main__btn operations">
-        <input type="button" value="+" class="btn operations__btn">
-        <input type="button" value="-" class="btn operations__btn">
-        <input type="button" value="*" class="btn operations__btn">
-        <input type="button" value="/" class="btn operations__btn">
+        <input type="button" value="+" class="btn operations__btn" data-js="operation-button">
+        <input type="button" value="-" class="btn operations__btn" data-js="operation-button">
+        <input type="button" value="*" class="btn operations__btn" data-js="operation-button">
+        <input type="button" value="/" class="btn operations__btn" data-js="operation-button">
       </div>
 
       <div class="main__btn actions">
-        <input type="button" value="=" class="btn actions__btn" id="calcButton">
-        <input type="button" value="CE" class="btn actions__btn" id="clearButton">
+        <input type="button" value="=" class="btn actions__btn" data-id="calc-button">
+        <input type="button" value="CE" class="btn actions__btn" data-id="clear-button">
       </div>
     </main>
     <script src="script/challenge-23.js"></script>

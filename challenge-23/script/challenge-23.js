@@ -23,42 +23,91 @@ multiplicação (x), então no input deve aparecer "1+2x".
 input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
-const $input = document.getElementById('mainInput');
-const $numericButtons = document.querySelectorAll('.numeric__btn');
-const $operationButtons = document.querySelectorAll('.operations__btn');
-const $clearButton = document.getElementById('clearButton');
 
-for (let number of $numericButtons) {
-  number.addEventListener('click', e => {
-    e.preventDefault();
-    $input.value += number.value;
+(function(win, doc){
+
+  'use strict';
+
+  // declaração de variáveis!
+  const $input = document.querySelector('[data-js="input"');
+  const $numericButtons = document.querySelectorAll('[data-js="number-button"]');
+  const $operationButtons = document.querySelectorAll('[data-js="operation-button"]');
+  const $clearButton = document.querySelector('[data-id="clear-button"');
+  const $calcButton = document.querySelector('[data-id="calc-button"');
+
+  Array.prototype.forEach.call($numericButtons, function(button) {
+    button.addEventListener('click', clickNumber, false);
   });
-}
 
-for (let operator of $operationButtons) {
-  operator.addEventListener('click', e => {
-    e.preventDefault();
+  Array.prototype.forEach.call($operationButtons, function(button) {
+    button.addEventListener('click', clickOperation, false);
+  });
 
-  if($input.value.match(/[+-\/*]$/)) {
-    $input.value = $input.value.replace(/.$/, operator.value);
-    return;
+  $clearButton.addEventListener('click', clearInput, false);
+
+  $calcButton.addEventListener('click', calcInput, false);
+
+  function clickNumber(event) {
+    $input.value += this.value;
   }
-    $input.value += operator.value;
-  })
-}
 
-clearButton.addEventListener('click', e => {
-  e.preventDefault();
-  $input.value = 0;
-});
+  function clickOperation(event) {
+    if (isLastOperation()) $input.value = $input.value.replace(/.{3}$/, ` ${this.value} `);
+    else $input.value += ` ${this.value} `;
+  }
 
-calcButton.addEventListener('click', e => {
-  e.preventDefault();
-  let inputValue = $input.value;
+  function calcInput() {
+    if (isLastOperation()) $input.value = $input.value.slice(0, -3);
+    let result = $input.value.split(' ');
 
-  for (let i = 0; i < inputValue.length; i++) {
-    if (inputValue[i] === '+') {
-
+    // checando as primeiras operações, de multiplicação e divisão!
+    for (let i = 0; i < result.length; i++) {
+      if (result[i] === '*') {
+        result[i] = applyOperation('*', result, result[i-1], result[i+1]);
+        i = 0; // volta para o índice 0, para rever a conta novamente
+      }
+      else if (result[i] === '/') {
+        result[i] = applyOperation('/', result, result[i-1], result[i+1]);
+        i = 0;
+      }
     }
+
+    // checando as outras operações, de soma e subtração!
+    for (let i = 0; i < result.length; i++) {
+      if (result[i] === '+') {
+        result[i] = applyOperation('+', result, result[i-1], result[i+1]);
+        i = 0;
+      }
+      else if (result[i] === '-') {
+        result[i] = applyOperation('-', result, result[i-1], result[i+1]);
+        i = 0;
+      }
+    }
+    console.log(result);
+    $input.value = result.toString();
+
   }
-});
+
+  function clearInput(event) {
+    $input.value = 0;
+  }
+
+  function isLastOperation() {
+  return $input.value.match(/\s[+*\/-]\s$/);
+  }
+
+  function applyOperation(operator, arr, previousIndex, nextIndex) {
+    let current;
+    if (operator === '+') current = parseInt(arr[previousIndex]) + parseInt(next);
+    if (operator === '-') current = parseInt(previous) - parseInt(next);
+    if (operator === '*') current = parseInt(previous) * parseInt(next);
+    if (operator === '/') current = parseInt(previous) / parseInt(next);
+    console.log(previous, next)
+    console.log('dentro da função', arr);
+    arr.splice(next, 1);
+    arr.splice(previous, 1);
+    console.log('dentro da função', arr);
+    return current;
+  }
+
+})(window, document);
