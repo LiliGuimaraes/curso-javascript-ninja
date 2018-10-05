@@ -48,6 +48,9 @@ input;
   $calcButton.addEventListener('click', calcInput, false);
 
   function clickNumber(event) {
+    if ($input.value === '0') {
+      $input.value = '';
+    }
     $input.value += this.value;
   }
 
@@ -63,11 +66,13 @@ input;
     // checando as primeiras operações, de multiplicação e divisão!
     for (let i = 0; i < result.length; i++) {
       if (result[i] === '*') {
-        result[i] = applyOperation('*', result, result[i-1], result[i+1]);
+        result[i] = +result[i - 1] * +result[i + 1];
+        removeAroundIndex(result, i);
         i = 0; // volta para o índice 0, para rever a conta novamente
       }
       else if (result[i] === '/') {
-        result[i] = applyOperation('/', result, result[i-1], result[i+1]);
+        result[i] = +result[i - 1] / +result[i + 1];
+        removeAroundIndex(result, i);
         i = 0;
       }
     }
@@ -75,15 +80,16 @@ input;
     // checando as outras operações, de soma e subtração!
     for (let i = 0; i < result.length; i++) {
       if (result[i] === '+') {
-        result[i] = applyOperation('+', result, result[i-1], result[i+1]);
+        result[i] = +result[i - 1] + +result[i + 1];
+        removeAroundIndex(result, i);
         i = 0;
       }
       else if (result[i] === '-') {
-        result[i] = applyOperation('-', result, result[i-1], result[i+1]);
+        result[i] = +result[i - 1] - +result[i + 1];
+        removeAroundIndex(result, i);
         i = 0;
       }
     }
-    console.log(result);
     $input.value = result.toString();
 
   }
@@ -96,18 +102,9 @@ input;
   return $input.value.match(/\s[+*\/-]\s$/);
   }
 
-  function applyOperation(operator, arr, previousIndex, nextIndex) {
-    let current;
-    if (operator === '+') current = parseInt(arr[previousIndex]) + parseInt(next);
-    if (operator === '-') current = parseInt(previous) - parseInt(next);
-    if (operator === '*') current = parseInt(previous) * parseInt(next);
-    if (operator === '/') current = parseInt(previous) / parseInt(next);
-    console.log(previous, next)
-    console.log('dentro da função', arr);
-    arr.splice(next, 1);
-    arr.splice(previous, 1);
-    console.log('dentro da função', arr);
-    return current;
+  function removeAroundIndex(arr, i) {
+    arr.splice(i + 1, 1);
+    arr.splice(i - 1, 1);
   }
 
 })(window, document);
