@@ -14,3 +14,23 @@ https://developer.mozilla.org/en-US/docs/Web/Events#Categories
 Tente aplicar na prática alguns dos eventos que estão ali e coloque nesse
 desafio os experimentos legais que você conseguir desenvolver :D
 */
+
+(function(win, doc){
+  'use strict';
+
+  const $p = document.querySelector('p');
+
+  win.addEventListener('beforeprint', function() {
+    alert('Antes de printar!');
+  });
+
+  $p.addEventListener('copy', function(event) {
+    event.preventDefault();
+    event.clipboardData.setData('text/plain', ' '); // Não permite que o conteúdo seja copiado
+  });
+
+  win.addEventListener('contextmenu', function(event) { // Não aparece opções do botão direito
+    event.preventDefault();
+    return false;
+  });
+})(window, document);
