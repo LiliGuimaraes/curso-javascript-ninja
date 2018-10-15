@@ -25,3 +25,71 @@
   - Utilize a lib DOM criada anteriormente para facilitar a manipulação e
   adicionar as informações em tela.
   */
+
+  (function(DOM){
+
+    'use strict';
+
+    let $submit = new DOM('[data-js="submitButton"]');
+    let $input = new DOM('[data-js="inputCEP"]');
+    let $inputValue = $input.get()[0].value;
+
+    let $statusMessage = new DOM('[data-js="statusMessage"]');
+
+    let $logradouro = new DOM('[data-js="logradouro"]');
+    let $bairro = new DOM('[data-js="bairro"]');
+    let $estado = new DOM('[data-js="estado"]');
+    let $cidade = new DOM('[data-js="cidade"]');
+    let $cep = new DOM('[data-js="cep"]');
+
+    $submit.get()[0].addEventListener('click', function(event) {
+      event.preventDefault();
+
+      cleanNonNumber();
+
+      let ajax = new XMLHttpRequest();
+      ajax.open('GET', `http://apps.widenet.com.br/busca-cep/api/cep/${$inputValue}.json`);
+      $statusMessage.get()[0].innerHTML = `Buscando informações para o CEP ${$inputValue}`;
+      ajax.send();
+
+      ajax.addEventListener('readystatechange', function() {
+        let response;
+
+        if ( isRequestOk(ajax) ) {
+          try {
+            response = JSON.parse(ajax.responseText);
+          }
+          catch (error) {
+            $statusMessage.get()[0].innerHTML = `Não encontramos o endereço para o CEP ${$inputValue}`;
+            response = null;
+          }
+
+          if (response) {
+            $statusMessage.get()[0].innerHTML = `Endereço referente ao CEP ${$inputValue}`;
+            fillCepInfo(response);
+          }
+        }
+      });
+    }, false);
+
+    function cleanNonNumber() {
+      $inputValue = $input.get()[0].value.replace(/\D/gi, '');
+    }
+
+    function isRequestOk(ajax) {
+      return ajax.status === 200 && ajax.readyState === 4;
+    }
+
+    function fillCepInfo(response) {
+          getSpan($cep).innerHTML = response.code;
+          getSpan($estado).innerHTML = response.state;
+          getSpan($cidade).innerHTML = response.city;
+          getSpan($bairro).innerHTML = response.district;
+          getSpan($logradouro).innerHTML = response.address;
+    }
+
+    function getSpan(element) {
+      return element.get()[0].childNodes[1];
+    }
+
+  })(window.DOM);
