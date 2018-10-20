@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Carros</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1 data-js="companyName"></h1>
+      <p data-js="companyPhone"></p>
+    </header>
+    <main>
+      <h2>Cadastro de carros</h2>
+      <form class="form-car">
+        <div class="form-car__image">
+          <label for="car-image">Imagem do carro</label>
+          <input type="url" id="car-image" name="image" data-js="inputForm">
+        </div>
+        <div class="form-car__marca">
+          <label for="car-brand">Marca/modelo do carro</label>
+          <input type="text" id="car-brand" name="brand" data-js="inputForm">
+        </div>
+        <div class="form-car__ano">
+          <label for="car-year">Ano</label>
+          <input type="text" id="car-year" name="year" data-js="inputForm">
+        </div>
+        <div class="form-car__placa">
+          <label for="car-plate">Placa</label>
+          <input type="text" id="car-plate" name="plate" data-js="inputForm">
+        </div>
+        <div class="form-car__cor">
+          <label for="car-color">Cor</label>
+          <input type="text" id="car-color" name="color" data-js="inputForm">
+        </div>
+        <input type="submit" value="Cadastrar" data-js="submitButton">
+      </form>
+
+      <h2>Carros cadastrados</h2>
+      <table class="table" border="collapse">
+        <tr>
+          <th>Imagem</th>
+          <th>Marca/Modelo</th>
+          <th>Ano</th>
+          <th>Placa</th>
+          <th>Cor</th>
+        </tr>
+      </table>
+    </main>
+
+    <script src="domLibrary.js"></script>
+    <script src="challenge-29.js"></script>
+  </body>
+</html>
